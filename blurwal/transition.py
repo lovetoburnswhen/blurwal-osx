@@ -23,8 +23,8 @@ class Transition(threading.Thread):
         super(Transition, self).__init__()
         self._stop_event = threading.Event()
 
-        self.from_blur_level: int = from_blur_level
-        self.to_blur_level: int = to_blur_level
+        self._from_blur_level: int = from_blur_level
+        self._to_blur_level: int = to_blur_level
 
         self.current_level: int = from_blur_level
 
@@ -52,18 +52,18 @@ class Transition(threading.Thread):
 
         :return: None
         """
-        if self.from_blur_level > self.to_blur_level:
+        if self._from_blur_level > self._to_blur_level:
             logging.info('Unblurring from blur level %s to %s.',
-                         self.from_blur_level, self.to_blur_level)
+                         self._from_blur_level, self._to_blur_level)
 
-            blur_levels = reversed(range(self.to_blur_level,
-                                         self.from_blur_level))
+            blur_levels = reversed(range(self._to_blur_level,
+                                         self._from_blur_level))
         else:
             logging.info('Blurring from blur level %s to %s.',
-                         self.from_blur_level, self.to_blur_level)
+                         self._from_blur_level, self._to_blur_level)
 
-            blur_levels = range(self.from_blur_level + 1,
-                                self.to_blur_level + 1)
+            blur_levels = range(self._from_blur_level + 1,
+                                self._to_blur_level + 1)
 
         for level in blur_levels:
             if self.is_stopped():
