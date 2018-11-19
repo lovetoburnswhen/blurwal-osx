@@ -7,7 +7,7 @@ import argparse
 import logging
 import multiprocessing
 import re
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 import Xlib
 from Xlib import X
@@ -77,7 +77,7 @@ class Blur:
 
     def init_transition(self, window_count: int,
                         blur: Optional[Transition],
-                        unblur: Optional[Transition]):
+                        unblur: Optional[Transition]) -> Tuple:
         """
         Initiate a blur or unblur transition depending on the given
         number of windows on the current workspace, and only if the

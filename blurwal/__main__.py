@@ -78,7 +78,7 @@ def parse_args(args: List) -> argparse.Namespace:
     return args
 
 
-def prepare_environment():
+def prepare_environment() -> None:
     """
     Create the required cache/temp directories if not already existing
     and register an exit handler for restoring the original wallpaper.
