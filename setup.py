@@ -35,9 +35,12 @@ setup(
     name='BlurWal',
     version=get_version(),
     description='Smoothly blurs the wallpaper when windows are opened.',
+    long_description=Path('README.md').read_text(),
+    long_description_content_type='text/markdown',
     keywords=['blur', 'wallpaper', 'desktop', 'ricing'],
+
     author='Benedikt Vollmerhaus',
-    author_email='benedikt@vollmerhaus.org',
+    author_email='pypi@vollmerhaus.org',
     url=PROJECT_URL,
     download_url=RELEASE_URL,
 

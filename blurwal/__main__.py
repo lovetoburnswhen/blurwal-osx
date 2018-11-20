@@ -16,7 +16,7 @@ from blurwal._version import __version__
 from blurwal.blur import Blur
 
 
-def parse_args(args: List) -> argparse.Namespace:
+def parse_args(arg_list: List) -> argparse.Namespace:
     """
     Parse and return any provided command line arguments.
 
@@ -64,7 +64,7 @@ def parse_args(args: List) -> argparse.Namespace:
                         action='store_true',
                         help='print detailed debug output')
 
-    args = parser.parse_args(args)
+    args = parser.parse_args(arg_list)
 
     if args.steps < 2:
         parser.error('The transition must have at least 2 steps.')
