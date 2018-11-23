@@ -20,7 +20,7 @@ class Transition(threading.Thread):
     """
 
     def __init__(self, from_blur_level: int, to_blur_level: int):
-        super(Transition, self).__init__()
+        super().__init__()
         self._stop_event = threading.Event()
 
         self._from_blur_level: int = from_blur_level

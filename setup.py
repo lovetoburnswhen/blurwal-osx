@@ -12,9 +12,9 @@ from setuptools import setup
 
 def get_version() -> str:
     """
-    Return the program version from the version file.
+    Return the BlurWal version from the version module.
 
-    :return: The program version
+    :return: The BlurWal version
     """
     base_dir = Path(__file__).parent
     version_file = base_dir / 'blurwal/_version.py'
@@ -33,11 +33,12 @@ RELEASE_URL = f'{PROJECT_URL}/-/archive/{VERSION}/blurwal-{VERSION}.tar.gz'
 
 setup(
     name='BlurWal',
-    version=get_version(),
+    version=VERSION,
     description='Smoothly blurs the wallpaper when windows are opened.',
     long_description=Path('README.md').read_text(),
     long_description_content_type='text/markdown',
     keywords=['blur', 'wallpaper', 'desktop', 'ricing'],
+    license='MIT',
 
     author='Benedikt Vollmerhaus',
     author_email='pypi@vollmerhaus.org',
@@ -52,7 +53,6 @@ setup(
     setup_requires=['pytest-runner'],
     tests_require=['pytest', 'pytest-mock', 'pytest-datadir'],
 
-    license='MIT',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: X11 Applications',
