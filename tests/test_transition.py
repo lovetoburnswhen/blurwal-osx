@@ -22,7 +22,7 @@ def change_to_with_delay(_path: str):
 def test_run_blur(mock_change_to):
     thread = Transition(1, 9)
     thread.start()
-    time.sleep(0.1)
+    thread.join()  # Wait for thread completion
     assert mock_change_to.call_count == 8
 
 
@@ -30,7 +30,7 @@ def test_run_blur(mock_change_to):
 def test_run_unblur(mock_change_to):
     thread = Transition(8, 2)
     thread.start()
-    time.sleep(0.1)
+    thread.join()  # Wait for thread completion
     assert mock_change_to.call_count == 6
 
 

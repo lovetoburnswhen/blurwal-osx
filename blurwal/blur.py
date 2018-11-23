@@ -22,10 +22,10 @@ class Blur:
     """
 
     def __init__(self, args: argparse.Namespace) -> None:
-        self.open_threshold: int = args.threshold
+        self.window_threshold: int = args.min
         self.transition_steps: int = args.steps
-        self.max_sigma: int = args.max
-        self.ignored: List[str] = args.ignore
+        self.max_sigma: int = args.blur
+        self.ignored_classes: List[str] = args.ignore
 
     def listen_for_events(self) -> None:
         """
@@ -72,7 +72,7 @@ class Blur:
                     if self.frames_are_outdated():
                         self.generate_transition_frames()
 
-                window_count = window.count_on_current_ws(self.ignored)
+                window_count = window.count_on_current_ws(self.ignored_classes)
                 blur, unblur = self.init_transition(window_count, blur, unblur)
 
     def init_transition(self, window_count: int,
@@ -83,9 +83,9 @@ class Blur:
         number of windows on the current workspace, and only if the
         previously started transition was in the opposite direction.
 
-        (Transitions may only be started alternately, so an unblur
+        Transitions can only be started alternately, so an unblur
         one may only occur after a blur transition and vice versa,
-        regardless of whether the previous transition is finished.)
+        regardless of whether the previous transition is finished.
 
         :param window_count: The number of open windows
         :param blur: The previous blur transition or None
@@ -93,14 +93,14 @@ class Blur:
         :return: The current transition threads
         """
         # Blur
-        if window_count >= self.open_threshold and unblur is not None:
+        if window_count >= self.window_threshold and unblur is not None:
             unblur.stop()
             blur = Transition(unblur.current_level, self.transition_steps)
             blur.start()
             unblur = None
 
         # Unblur
-        if window_count < self.open_threshold and blur is not None:
+        if window_count < self.window_threshold and blur is not None:
             blur.stop()
             unblur = Transition(blur.current_level, 0)
             unblur.start()

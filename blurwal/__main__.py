@@ -35,7 +35,7 @@ def parse_args(arg_list: List) -> argparse.Namespace:
     parser.add_argument('-v', '--version',
                         action='version', version=f'%(prog)s {__version__}')
 
-    parser.add_argument('-t', '--threshold',
+    parser.add_argument('-m', '--min',
                         type=int, metavar='N', default=2,
                         help='the minimum number of windows to blur the '
                              'wallpaper (default: %(default)d)')
@@ -45,9 +45,9 @@ def parse_args(arg_list: List) -> argparse.Namespace:
                         help='the number of steps in a blur transition, '
                              'see below (default: %(default)d, min: 2)')
 
-    parser.add_argument('-m', '--max',
+    parser.add_argument('-b', '--blur',
                         type=int, metavar='N', default=10,
-                        help='the sigma (blur strength) to use when '
+                        help='the blur strength (sigma) to use when '
                              'fully blurred (default: %(default)d)')
 
     parser.add_argument('-i', '--ignore',
