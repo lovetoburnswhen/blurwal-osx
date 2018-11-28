@@ -23,7 +23,7 @@ def parse_args(arg_list: List) -> argparse.Namespace:
     :return: A namespace holding the parsed arguments
     """
     parser = argparse.ArgumentParser(
-        description='Smoothly blur the wallpaper when windows are opened.',
+        description='Smoothly blurs the wallpaper when windows are opened.',
         epilog="The transition's speed is based on the chosen number of "
                "steps in combination with how quickly feh can update "
                "the wallpaper on your system. This cannot be changed, as "
