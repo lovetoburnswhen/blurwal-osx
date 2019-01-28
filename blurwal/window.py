@@ -30,12 +30,17 @@ def count_on_current_ws(ignored_classes: List[str]) -> int:
                             get_workspace(window) == ewmh.getCurrentDesktop()]
 
     for window in windows_on_workspace:
-        window_class = window.get_wm_class()
+        try:
+            window_class = window.get_wm_class()
+        except Xlib.error.BadWindow:
+            logging.info('Ignoring bad window (id: %s)', window.id)
+            continue
 
         if window_class is not None and window_class[1] in ignored_classes:
             logging.info("Ignoring window with class '%s'.", window_class[1])
-        else:
-            window_count += 1
+            continue
+
+        window_count += 1
 
     return window_count
 
