@@ -35,6 +35,7 @@ linting:
   stage: test
   script:
     - tox -e flake8
+  allow_failure: true
 
 
 package:

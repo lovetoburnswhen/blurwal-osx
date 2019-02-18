@@ -56,12 +56,12 @@ def get_current() -> str:
     """
     try:
         # Search for '-enclosed strings starting with / from back to front
-        wallpaper_path = re.search(r"(?s:.*)'(/+.+)'", paths.FEHBG_FILE.read_text())
-        if not wallpaper_path:
+        path = re.search(r"(?s:.*)'(/+.+)'", paths.FEHBG_FILE.read_text())
+        if not path:
             logging.error('Could not extract current wallpaper from ~/.fehbg')
             sys.exit(1)
 
-        return wallpaper_path.group(1)
+        return path.group(1)
     except FileNotFoundError:
         logging.exception('Could not open ~/.fehbg')
         sys.exit(1)
