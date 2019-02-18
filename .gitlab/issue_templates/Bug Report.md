@@ -16,7 +16,9 @@
   first to check if your issue is still reproducible there.
 -->
 
-* BlurWal version: 1.0.0
+* BlurWal version: `1.0.2`
+* ImageMagick version: ``
+* feh version: ``
 * Window Manager: 
 
 
