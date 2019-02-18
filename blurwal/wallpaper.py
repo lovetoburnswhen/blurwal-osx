@@ -55,7 +55,8 @@ def get_current() -> str:
     :return: The current wallpaper's path
     """
     try:
-        wallpaper_path = re.search(r"'(.*)'", paths.FEHBG_FILE.read_text())
+        # Search for '-enclosed strings starting with / from back to front
+        wallpaper_path = re.search(r"(?s:.*)'(/+.+)'", paths.FEHBG_FILE.read_text())
         if not wallpaper_path:
             logging.error('Could not extract current wallpaper from ~/.fehbg')
             sys.exit(1)

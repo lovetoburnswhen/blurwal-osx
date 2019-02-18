@@ -42,6 +42,11 @@ def test_get_current(mocker, datadir):
     assert wallpaper.get_current() == '/home/user/images/wallpaper.png'
 
 
+def test_get_current_with_all_quoted_fehbg(mocker, datadir):
+    mocker.patch('blurwal.paths.FEHBG_FILE', datadir / '.fehbg_all_quoted')
+    assert wallpaper.get_current() == '/home/user/images/wallpaper.png'
+
+
 def test_get_current_exits_when_fehbg_invalid(mocker, datadir):
     mocker.patch('blurwal.paths.FEHBG_FILE', datadir / '.fehbg_invalid')
     with pytest.raises(SystemExit):
