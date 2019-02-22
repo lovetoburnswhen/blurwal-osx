@@ -11,6 +11,7 @@ from typing import List, Optional, Tuple
 
 import Xlib
 from Xlib import X
+from ewmh import ewmh
 
 from blurwal import frame, paths, utils, wallpaper, window
 from blurwal.transition import Transition
@@ -53,6 +54,7 @@ class Blur:
         """
         # Connect to X server
         display = Xlib.display.Display()
+        ewmh_connection = ewmh.EWMH()
 
         root_win = display.screen().root
         root_win.change_attributes(event_mask=X.SubstructureNotifyMask)
@@ -72,7 +74,8 @@ class Blur:
                     if self.frames_are_outdated():
                         self.generate_transition_frames()
 
-                window_count = window.count_on_current_ws(self.ignored_classes)
+                window_count = window.count_on_current_ws(
+                    self.ignored_classes, ewmh_connection)
                 blur, unblur = self.init_transition(window_count, blur, unblur)
 
     def init_transition(self, window_count: int,
