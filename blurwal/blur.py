@@ -9,8 +9,8 @@ import multiprocessing
 import re
 from typing import List, Optional, Tuple
 
-import Xlib
 import ewmh
+import Xlib
 from Xlib import X
 
 from blurwal import frame, paths, utils, wallpaper, window
