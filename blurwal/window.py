@@ -9,7 +9,9 @@ import logging
 from typing import List
 
 import Xlib
-from ewmh import EWMH
+import ewmh
+
+EWMH = ewmh.EWMH()
 
 
 def count_on_current_ws(ignored_classes: List[str]) -> int:
@@ -22,12 +24,11 @@ def count_on_current_ws(ignored_classes: List[str]) -> int:
     :param ignored_classes: A list of window classes to ignore
     :return: The number of open windows on the workspace
     """
-    ewmh = EWMH()
     window_count = 0
 
-    all_windows = ewmh.getClientList()
+    all_windows = EWMH.getClientList()
     windows_on_workspace = [window for window in all_windows if
-                            get_workspace(window) == ewmh.getCurrentDesktop()]
+                            get_workspace(window) == EWMH.getCurrentDesktop()]
 
     for window in windows_on_workspace:
         try:
@@ -53,10 +54,8 @@ def get_workspace(window) -> int:
     :param window: A window whose workspace number to get
     :return: The window's workspace number or -1 if missing
     """
-    ewmh = EWMH()
-
     try:
-        return ewmh.getWmDesktop(window)
+        return EWMH.getWmDesktop(window)
     except Xlib.error.BadWindow:
         logging.info('Bad window (id: %s)', window.id)
     except TypeError:
