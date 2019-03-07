@@ -31,7 +31,7 @@ jobs:
             pip install -r "requirements.txt"
       - run:
           name: Running PyTest
-          command: pytest --cov={envsitepackagesdir}/blurwal/ tests/
+          command: pytest --cov=blurwal tests/
       - run:
           name: Running Flake8 Linting
           command: flake8 blurwal/ tests/ setup.py
