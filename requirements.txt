@@ -2,7 +2,8 @@ setuptools==40.6.2
 Xlib==0.21
 ewmh==0.1.6
 typing==3.6.6
-pytest==4.3.0
+pytest
 pytest-cov
 pytest-datadir
 pytest-mock
+flake8
