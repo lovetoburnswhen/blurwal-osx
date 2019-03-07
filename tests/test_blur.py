@@ -1,10 +1,3 @@
-"""
-Test cases for the main event listener.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 from argparse import Namespace
 from multiprocessing.pool import Pool
 

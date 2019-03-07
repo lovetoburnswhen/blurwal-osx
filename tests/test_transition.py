@@ -1,10 +1,3 @@
-"""
-Test cases for the transition thread.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 import time
 from unittest import mock
 

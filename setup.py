@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 from pathlib import Path
 
 from setuptools import setup

@@ -1,10 +1,3 @@
-"""
-Utility functions not specific to a module.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 import logging
 import subprocess
 from typing import Tuple
@@ -42,4 +35,4 @@ def show_notification(title: str, content: str) -> None:
     try:
         subprocess.run(['notify-send', title, content])
     except FileNotFoundError:
-        logging.info('libnotify not installed, cannot show notification.')
+        logging.info('libnotify not installed, cannot show notification. Install with Homebrew.')

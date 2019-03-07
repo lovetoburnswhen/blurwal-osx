@@ -1,10 +1,3 @@
-"""
-Transition frame generation via ImageMagick's convert utility.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 import filecmp
 import subprocess
 from pathlib import Path

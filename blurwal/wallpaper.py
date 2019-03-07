@@ -1,10 +1,3 @@
-"""
-Functions for retrieving and setting the wallpaper.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 import logging
 import re
 import subprocess
@@ -16,14 +9,16 @@ from blurwal import paths
 
 def change_to(path: str) -> None:
     """
-    Set the given image as the wallpaper using feh.
+    Set the given image as the wallpaper using osascript.
 
     :param path: The image to set as the wallpaper
     :return: None
     """
     logging.debug('Setting wallpaper to: %s', path)
-    subprocess.run(['feh', '--bg-fill', path])
-
+    # osascript -e 'tell application "Finder" to set desktop picture to "/Users/frank/Downloads/Wallpapers/a3MmPez.jpg" as POSIX file'
+        # Only works when disabled automatically cycling wallpapers, if enabled it sets it to some random image
+        # Might have to have the app be a wallpaper manager/cycler on its own
+    subprocess.run(['osascript', '-e', '\'tell application "Finder" to set desktop picture to {} as POSIX file\''.format(path)])
 
 def changed_externally() -> bool:
     """
@@ -50,21 +45,17 @@ def is_transition() -> bool:
 
 def get_current() -> str:
     """
-    Return the current wallpaper's path from the ~/.fehbg file.
+    Return the current wallpaper's path via an osascript query
 
     :return: The current wallpaper's path
     """
-    try:
-        # Search for '-enclosed strings starting with / from back to front
-        path = re.search(r"(?s:.*)'(/+.+)'", paths.FEHBG_FILE.read_text())
-        if not path:
-            logging.error('Could not extract current wallpaper from ~/.fehbg')
-            sys.exit(1)
-
-        return path.group(1)
-    except FileNotFoundError:
-        logging.exception('Could not open ~/.fehbg')
+    path = subprocess.run(['osascript', '-e', '\'tell application "Finder" to get posix path of (get desktop picture as alias)\''])
+    if not path:
+        logging.error('Could not get current wallpaper via osascript ')
         sys.exit(1)
+
+    return path.group(1)
+
 
 
 def get_original() -> str:

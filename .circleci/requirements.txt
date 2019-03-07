@@ -1,0 +1,5 @@
+setuptools==40.6.2
+pytest==4.3.0
+Xlib==0.21
+ewmh==0.1.6
+typing==3.6.6

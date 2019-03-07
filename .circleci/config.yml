@@ -1,0 +1,51 @@
+default: &default
+  working_directory: ~/blurwal-osx 
+
+# restore_cache: &restore-py-deps-cache
+#   key: v1-py-cache-{{ .Branch }}-{{ checksum "requirements.txt" }}
+
+restore_cache: &restore-py-deps-cache
+    keys:
+      # when lock file changes, use increasingly general patterns to restore cache
+      - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - pip-packages-v1-{{ .Branch }}-
+      - pip-packages-v1-
+
+save_cache: &save-py-deps-cache
+  paths:
+    - ~/.cache/pip
+  key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+
+
+
+
+version: 2
+jobs:
+  test-3.7:
+    <<: *default
+    docker: &py37
+      - image: python:3.7-alpine
+    steps:
+      - checkout
+      - *restore-py-deps-cache
+      - run: 
+          name: Setup Python Environment
+          command: |
+            pip install -r "requirements.txt"
+      - run:
+          name: Running PyTest
+          command: pytest --cov={envsitepackagesdir}/blurwal tests/
+      - run:
+          name: Running Flake8 Linting
+          command: flake8 blurwal/ tests/ setup.py
+    
+
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-3.7:
+          filters:
+            branches:
+              only: master

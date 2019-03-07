@@ -1,8 +1,3 @@
-"""
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 import argparse
 import logging
 import multiprocessing

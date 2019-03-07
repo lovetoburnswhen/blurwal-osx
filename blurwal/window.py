@@ -1,15 +1,7 @@
-"""
-Window and workspace operations using Xlib.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 import logging
 from typing import List
 
-import Xlib
-from ewmh import EWMH
+import subprocess
 
 
 def count_on_current_ws(ignored_classes: List[str], ewmh: EWMH) -> int:
@@ -23,24 +15,14 @@ def count_on_current_ws(ignored_classes: List[str], ewmh: EWMH) -> int:
     :param ewmh: An instance of EWMH for workspace retrieval
     :return: The number of open windows on the workspace
     """
-    window_count = 0
-
-    all_windows = ewmh.getClientList()
-    windows_on_ws = [w for w in all_windows
-                     if get_workspace(w, ewmh) == ewmh.getCurrentDesktop()]
-
-    for window in windows_on_ws:
-        try:
-            window_class = window.get_wm_class()
-        except Xlib.error.BadWindow:
-            logging.info('Ignoring bad window (id: %s)', window.id)
-            continue
-
-        if window_class is not None and window_class[1] in ignored_classes:
-            logging.info("Ignoring window with class '%s'.", window_class[1])
-            continue
-
-        window_count += 1
+    window_count = subprocess.run('''osascript -e \'
+                        tell application "System Events"
+                            set win_count to {}
+                            repeat with theProcess in (application processes where visible is true)
+                                set win_count to win_count & (value of (first attribute whose name is "AXWindows") of theProcess)
+                            end repeat
+                            get count of win_count
+                        end tell\'''', stdout=subprocess.PIPE).stdout.decode('utf-8')
 
     return window_count
 

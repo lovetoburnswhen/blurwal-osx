@@ -1,10 +1,3 @@
-"""
-Test cases for the wallpaper module.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 from pathlib import Path
 
 import pytest

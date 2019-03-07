@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 import argparse
 import atexit
 import logging

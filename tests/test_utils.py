@@ -1,10 +1,3 @@
-"""
-Test cases for the utility module.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 from pytest import approx
 
 from blurwal import utils

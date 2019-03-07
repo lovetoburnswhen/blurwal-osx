@@ -1,10 +1,3 @@
-"""
-Path constants used in other modules.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 import tempfile
 from pathlib import Path
 

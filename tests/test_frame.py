@@ -1,10 +1,3 @@
-"""
-Test cases for the frame module.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 from pathlib import Path
 
 from blurwal import frame

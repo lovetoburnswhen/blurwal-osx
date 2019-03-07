@@ -1,10 +1,3 @@
-"""
-Test cases for the main module.
-
-Author: Benedikt Vollmerhaus
-License: MIT
-"""
-
 import logging
 
 import pytest
