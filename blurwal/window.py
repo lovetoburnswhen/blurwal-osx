@@ -4,7 +4,7 @@ from typing import List
 import subprocess
 
 
-def count_on_current_ws(ignored_classes: List[str], ewmh: EWMH) -> int:
+def count_on_current_ws(ignored_classes: List[str]) -> int:
     """
     Count the number of open windows on the current workspace.
 

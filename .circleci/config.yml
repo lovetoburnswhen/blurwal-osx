@@ -27,11 +27,10 @@ jobs:
       - restore_cache: *restore-py-deps-cache
       - run: 
           name: Setup Python Environment
-          command: |
-            pip install -r "requirements.txt"
+          command: pip install -r "requirements.txt"
       - run:
-          name: Running PyTest
-          command: pytest --cov=blurwal tests/
+          name: Running Tox
+          command: tox -e py37
       - run:
           name: Running Flake8 Linting
           command: flake8 blurwal/ tests/ setup.py

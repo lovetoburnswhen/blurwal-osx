@@ -2,8 +2,9 @@ setuptools==40.6.2
 Xlib==0.21
 ewmh==0.1.6
 typing==3.6.6
+pathlib
 pytest
-pytest-cov
 pytest-datadir
-pytest-mock
+pytest-cov
 flake8
+tox
